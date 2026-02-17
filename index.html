@@ -12,6 +12,20 @@ body {
   overflow-x: hidden;
 }
 
+/* Floating Hearts */
+.heart-bg {
+  position: fixed;
+  bottom: -10px;
+  font-size: 20px;
+  animation: floatUp 10s linear infinite;
+  color: #ff69b4;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
 h1 {
   color: #ff4fa3;
   margin-top: 20px;
@@ -206,5 +220,3 @@ function hug() {
 
 </body>
 </html>
-
-
