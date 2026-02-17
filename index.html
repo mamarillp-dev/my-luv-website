@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>For my Luv 💖</title>
+
+<style>
+body {
+  font-family: 'Comic Sans MS', cursive;
+  background: linear-gradient(to bottom, #ffd6ec, #ffeef8);
+  text-align: center;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+/* Floating Hearts */
+.heart-bg {
+  position: fixed;
+  bottom: -10px;
+  font-size: 20px;
+  animation: floatUp 10s linear infinite;
+  color: #ff69b4;
+}
+
+@keyframes floatUp {
+  0% { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-110vh); opacity: 0; }
+}
+
+h1 {
+  color: #ff4fa3;
+  margin-top: 20px;
+}
+
+.section {
+  background: white;
+  padding: 20px;
+  margin: 20px auto;
+  width: 85%;
+  border-radius: 20px;
+  box-shadow: 0 0 15px pink;
+}
+
+button {
+  padding: 10px 15px;
+  margin: 8px;
+  border-radius: 20px;
+  border: none;
+  background-color: #ff8ac6;
+  color: white;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #ff5cad;
+}
+
+input {
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid pink;
+}
+
+#loginPage {
+  margin-top: 100px;
+}
+
+#mainContent {
+  display: none;
+}
+
+#hug {
+  font-size: 50px;
+  display: none;
+  animation: bounce 1s infinite;
+}
+
+@keyframes bounce {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.2); }
+  100% { transform: scale(1); }
+}
+</style>
+</head>
+
+<body>
+
+<!-- 🔐 LOGIN PAGE -->
+<div id="loginPage">
+  <h1>🔐 Secret Love Portal</h1>
+  <p>Enter our special date 💗</p>
+  <input type="password" id="passwordInput" placeholder="Password">
+  <br><br>
+  <button onclick="checkPassword()">Enter</button>
+  <p id="loginError" style="color:red;"></p>
+</div>
+
+<!-- 💖 MAIN WEBSITE -->
+<div id="mainContent">
+
+<h1>For my Luv 💗</h1>
+
+<div class="section">
+  <h2>💌 Open When Letters</h2>
+  <button onclick="alert('Open when you miss me 💕 I’m thinking about you every second.')">Miss Me</button>
+  <button onclick="alert('Open when you’re sad 💗 I will always choose you.')">Sad</button>
+  <button onclick="alert('Open when you need reassurance 💞 You are my forever.')">Reassurance</button>
+  <button onclick="alert('Open when you feel alone 🌙 I am always with you.')">Alone</button>
+</div>
+
+<div class="section">
+  <h2>💖 Our Timeline</h2>
+  <p>💫 The day we met: Valo 12/8/24</p>
+  <p>💬 Our first long talk: 3am valo and marvels</p>
+  <p>💗 I Love you my Luv</p>
+  <p>🎵 Wantchu by Keshi 08/08/26</p>
+</div>
+
+<div class="section">
+  <h2>🌙 Reasons I Love You</h2>
+  <button onclick="showReason()">Click for a Reason</button>
+  <p id="reason"></p>
+</div>
+
+<div class="section">
+  <h2>🎮 Catch the Hearts</h2>
+  <p>Score: <span id="score">0</span></p>
+  <button onclick="startGame()">Start</button>
+  <div id="heartGame" style="height:200px; position:relative;"></div>
+  <p id="winMessage"></p>
+</div>
+
+<div class="section">
+  <h2>🧸 Virtual Hug</h2>
+  <button onclick="hug()">Send Hug</button>
+  <div id="hug">🤗💞</div>
+</div>
+
+</div>
+
+<script>
+
+/* 🔐 LOGIN */
+function checkPassword() {
+  const password = document.getElementById("passwordInput").value;
+  if (password === "0808") {
+    document.getElementById("loginPage").style.display = "none";
+    document.getElementById("mainContent").style.display = "block";
+    startFloatingHearts();
+  } else {
+    document.getElementById("loginError").innerText = "Wrong password my Luv 💔";
+  }
+}
+
+/* 💕 FLOATING HEARTS */
+function startFloatingHearts() {
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart-bg";
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    document.body.appendChild(heart);
+
+    setTimeout(() => {
+      heart.remove();
+    }, 10000);
+  }, 500);
+}
+
+/* 💌 REASONS */
+const reasons = [
+  "You are my safe place.",
+  "You stayed up till 3am with me.",
+  "You make long distance feel close.",
+  "You choose me every day.",
+  "You’re my favorite notification.",
+  "You’re my Luv forever.",
+  "You make Valorant feel romantic.",
+  "You’re my 0808 forever."
+];
+
+function showReason() {
+  const random = Math.floor(Math.random() * reasons.length);
+  document.getElementById("reason").innerText = reasons[random];
+}
+
+/* 🎮 MINI GAME */
+let score = 0;
+let interval;
+
+function startGame() {
+  score = 0;
+  document.getElementById("score").innerText = score;
+  document.getElementById("winMessage").innerText = "";
+  const area = document.getElementById("heartGame");
+  area.innerHTML = "";
+
+  interval = setInterval(createHeart, 700);
+
+  setTimeout(() => {
+    clearInterval(interval);
+  }, 10000);
+}
+
+function createHeart() {
+  const heart = document.createElement("div");
+  heart.innerHTML = "💖";
+  heart.style.position = "absolute";
+  heart.style.left = Math.random() * 80 + "%";
+  heart.style.top = Math.random() * 150 + "px";
+  heart.style.cursor = "pointer";
+
+  heart.onclick = function() {
+    score++;
+    document.getElementById("score").innerText = score;
+    heart.remove();
+
+    if (score >= 10) {
+      document.getElementById("winMessage").innerText = "You caught my heart forever my Luv 💗";
+    }
+  };
+
+  document.getElementById("heartGame").appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 1500);
+}
+
+/* 🧸 HUG */
+function hug() {
+  document.getElementById("hug").style.display = "block";
+}
+
+</script>
+
+</body>
+</html>
